@@ -18,9 +18,9 @@ var app = app || {};
 		// The DOM events specific to an item.
 		events: {
 			'click .toggle': 'toggleCompleted',
+            'click .priority-btn': 'togglePriority',
 			'dblclick label': 'edit',
             'click .edit-btn': 'edit',
-            // 'click .priority-btn': 'toggleLevel'
 			'click .destroy': 'clear',
 			'keypress .edit': 'updateOnEnter',
 			'keydown .edit': 'revertOnEscape',
@@ -52,8 +52,6 @@ var app = app || {};
 
 			this.$el.html(this.template(this.model.toJSON()));
 			this.$el.toggleClass('completed', this.model.get('completed'));
-            //does this work?
-            // this.$el.toggleClss('priority', this.model.get('priority'));
 			this.toggleVisible();
 			this.$input = this.$('.edit');
 			return this;
@@ -73,9 +71,9 @@ var app = app || {};
 		toggleCompleted: function () {
 			this.model.toggle();
 		},
-        //does this work?
-        toggleLevel: function() {
-            this.model.togglePriority();
+        //Toggle the `"priority"` class
+        togglePriority: function() {
+            this.$el.toggleClass('priority');
         },
 
 		// Switch this view into `"editing"` mode, displaying the input field.
